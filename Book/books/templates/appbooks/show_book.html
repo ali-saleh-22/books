@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Book Details{% endblock %}
+{% block content %}
+
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card border-0 shadow-lg rounded-4 overflow-hidden" style="max-width: 900px;">
+        <div class="row g-0">
+
+            <!-- صورة الكتاب -->
+            <div class="col-md-5">
+                <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="img-fluid h-100 w-100"
+                    style="object-fit: cover;">
+            </div>
+
+            <!-- تفاصيل الكتاب -->
+            <div class="col-md-7 bg-light d-flex flex-column">
+                <div class="p-4 flex-grow-1">
+                    <h3 class="fw-bold text-primary mb-3">{{ book.title }}</h3>
+
+                    <p class="text-muted mb-3">
+                        {{ book.summary }}
+                    </p>
+
+                    <div class="mb-2">
+                        <small class="text-secondary fw-bold">Categories:</small>
+                        {% for cat in book.category.all %}
+                        <a href="{% url 'appbooks.all_category_books' cat.slug %}"
+                            class="badge bg-primary text-decoration-none me-1">
+                            {{ cat.name }}
+                        </a>
+                        {% endfor %}
+                    </div>
+
+                    <p class="mb-2">
+                        <small class="text-secondary">✍ {{ book.author }}</small>
+                    </p>
+
+                    <div class="mt-3">
+                        {% if book.pdf %}
+                        <a href="{{ book.view_pdf_url }}" target="_blank"
+                            class="btn btn-outline-primary btn-sm rounded-pill">
+                            📖 view_pdf_book
+                        </a>
+                        {% comment %}
+                        <a href="{% url 'download_book' book.id %}" class="btn btn-primary">
+                            Download PDF
+                        </a>
+                        {% endcomment %}
+                        <a href="{{book.view_pdf_url}}" download="{{book.view_pdf_url}}" class="btn btn-primary">
+                            Download PDF
+                        </a>
+                        {% else %}
+                        <span class="badge bg-danger">❌ PDF not available</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="p-3 text-end border-top">
+                    <a href="{% url 'appbooks.index' %}" class="btn btn-primary btn-sm px-4 rounded-pill shadow-sm">
+                        ⬅ Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <h4 class="mb-4 text-primary">📚 Similar Books</h4>
+    <div class="row g-3">
+        {% for similar_book in similar_books %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <a href="{{ similar_book.show_url }}" class="text-decoration-none">
+                <div class="shadow-sm d-flex align-items-center justify-content-center bg-white"
+                    style="height:200px; border-radius:10px;">
+                    <img src="{{ similar_book.cover_image.url }}" alt="{{ similar_book.title }}" class="img-fluid"
+                        style="max-height: 100%; object-fit: contain; padding:6px;">
+                </div>
+                <p class="text-center mt-2 text-truncate small fw-bold text-dark">
+                    {{ similar_book.title }}
+                </p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block titile %} Book Search {% endblock %}
+
+{% block content %}
+
+
+<div class="container my-5">
+    <div class="row">
+        {% for result in results %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+            <a href="{{result.show_url}}">
+                <div class="shadow-sm d-flex align-items-center"
+                    style="height:200px; background:#f8f9fa; border-radius:6px;">
+                    <img src="{{ result.cover_image.url }}" alt="{{ book.title }}"
+                        style="max-height:100%; width:100%; object-fit:contain; padding:4px;">
+                </div>
+            </a>
+            <p class="text-center mt-2 text-truncate small fw-bold text-dark">
+                {{ result.title }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block titile %} All Category Books {% endblock %}
+
+{% block content %}
+
+
+<div class="container my-5">
+    <h4 class="mb-4 text-primary">{{ category.slug }} category books</h4>
+    <div class="row">
+        {% for book in category.books.all %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+            <a href="{{book.show_url}}">
+                <div class="shadow-sm d-flex align-items-center"
+                    style="height:200px; background:#f8f9fa; border-radius:6px;">
+                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}"
+                        style="max-height:100%; width:100%; object-fit:contain; padding:4px;">
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+</div>
+
+{% endblock %}

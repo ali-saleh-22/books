@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block titile %} BOOKS | HOME{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h4 class="mb-4 text-primary">📚 Recommended Books</h4>
+    <div class="row">
+        {% for book in recommended_books %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+            <a href="{{book.show_url}}">
+                <div class="shadow-sm d-flex align-items-center"
+                    style="height:200px; background:#f8f9fa; border-radius:6px;">
+                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}"
+                        style="max-height:100%; width:100%; object-fit:contain; padding:4px;">
+                </div>
+
+            </a>
+            <p class="text-center mt-2 text-truncate small fw-bold text-dark">
+                {{ book.title }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <h4 class="mt-5 mb-4 text-success">📖 Top Fiction Books</h4>
+    <div class="row">
+        {% for book in ficition_books %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+            <a href="{{book.show_url}}">
+                <div class="shadow-sm d-flex align-items-center"
+                    style="height:200px; background:#f8f9fa; border-radius:6px;">
+                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}"
+                        style="max-height:100%; width:100%; object-fit:contain; padding:4px;">
+                </div>
+            </a>
+            <p class="text-center mt-2 text-truncate small fw-bold text-dark">
+                {{ book.title }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <h4 class="mt-5 mb-4 text-danger">💼Top Business Books</h4>
+    <div class="row">
+        {% for book in business_books %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+            <a href="{{book.show_url}}">
+                <div class="shadow-sm d-flex align-items-center"
+                    style="height:200px; background:#f8f9fa; border-radius:6px;">
+                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}"
+                        style="max-height:100%; width:100%; object-fit:contain; padding:4px;">
+                </div>
+            </a>
+            <p class="text-center mt-2 text-truncate small fw-bold text-dark">
+                {{ book.title }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
